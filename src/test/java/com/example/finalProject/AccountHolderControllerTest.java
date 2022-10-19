@@ -15,9 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
 import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,7 +26,6 @@ public class AccountHolderControllerTest {
 
     @Autowired
     AccountHolderRespository accountHolderRespository;
-
     @Autowired
     AccountRepository accountRepository;
     @Autowired
@@ -55,7 +52,6 @@ public class AccountHolderControllerTest {
         assertEquals(500L, accountRepository.findById(1L).get().getBalance().getAmount().longValue());
 
     }
-
     @Test
     void transfer_money_not_enough_money() throws Exception {
         TransferDTO transferDTO = new TransferDTO("5000", 1L , 2L);
@@ -68,7 +64,6 @@ public class AccountHolderControllerTest {
         assertEquals("The account doesn't have enough funds", mvcResult.getResponse().getErrorMessage());
 
         assertEquals("The account doesn't have enough funds", mvcResult.getResponse().getErrorMessage());
-
 
     }
 }

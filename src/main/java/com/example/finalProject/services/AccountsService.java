@@ -3,13 +3,17 @@ package com.example.finalProject.services;
 import com.example.finalProject.embedables.Money;
 import com.example.finalProject.entities.DTO.AccountDTO;
 import com.example.finalProject.entities.accounts.Checking;
+import com.example.finalProject.entities.accounts.CreditCard;
 import com.example.finalProject.entities.accounts.Savings;
 import com.example.finalProject.entities.users.AccountHolder;
 import com.example.finalProject.repositories.accountRep.CheckingRepository;
+import com.example.finalProject.repositories.accountRep.CreditCardRepository;
 import com.example.finalProject.repositories.accountRep.SavingRepository;
 import com.example.finalProject.repositories.usersRep.AccountHolderRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.math.BigDecimal;
 
 @Service
@@ -22,6 +26,8 @@ public class AccountsService {
     AccountHolderRespository accountHolderRespository;
     @Autowired
     SavingRepository savingRepository;
+    @Autowired
+    CreditCardRepository creditCardRepository;
 
     public Checking createChecking(AccountDTO checkingDTO){
 
@@ -54,5 +60,23 @@ public class AccountsService {
 
         return  savingRepository.save(savings);
     }
-    //public AccountHolder
+    public CreditCard newCreditCard(AccountDTO creditCardDTO){
+
+        Money balance = new Money(new BigDecimal(creditCardDTO.getBalance()));
+        Money penaltyFee = new Money(new BigDecimal(creditCardDTO.getPenaltyFee()));
+        AccountHolder primaryOwner = accountHolderRespository.findById(creditCardDTO.getPrimaryOwnerId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NO_CONTENT));
+        AccountHolder secondaryOwner = accountHolderRespository.findById(creditCardDTO.getSecondaryOwnerId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NO_CONTENT));
+        BigDecimal interestedRate =  new BigDecimal(creditCardDTO.getInterestedRate());
+        Money minimumBalance = null;
+        if(creditCardDTO.getMinimumBalance() == null){
+            minimumBalance = new Money(new BigDecimal(5000));
+        }else{
+            minimumBalance = new Money(new BigDecimal(creditCardDTO.getMinimumBalance()));
+        }
+
+        Money creditLimit = new Money(new BigDecimal(creditCardDTO.))
+        CreditCard creditCard = new CreditCard(balance, penaltyFee, primaryOwner, secondaryOwner, minimumBalance, interestedRate);
+        return  creditCardRepository.save(creditCard);
+
+    }
 }

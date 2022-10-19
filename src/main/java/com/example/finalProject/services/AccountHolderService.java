@@ -50,7 +50,21 @@ public class AccountHolderService implements AccountHolderInterface {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "one or both of the accounts do not exist");
 
+    }
+    //metodo para que un AH vea su balances;
+    public Money toCheckBalance(Long id, Long accountId){
 
+        if(accountHolderRespository.findById(id).isPresent() && accountRepository.findById(accountId).isPresent()) {
+            AccountHolder holderId = accountHolderRespository.findById(id).get();
+            Account account = accountRepository.findById(accountId).get();
+            if (account.getPrimeryOwner().getId().equals(holderId.getId()) || account.getSecondaryOwner().getId().equals(holderId.getId())) {
+                return account.getBalance();
+            }else{
+                throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE," ");
+            }
+
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Holder do not exist");
     }
 
 

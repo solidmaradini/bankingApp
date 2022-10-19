@@ -3,8 +3,10 @@ package com.example.finalProject;
 import com.example.finalProject.embedables.Address;
 import com.example.finalProject.embedables.Money;
 import com.example.finalProject.entities.accounts.Checking;
+import com.example.finalProject.entities.accounts.CreditCard;
 import com.example.finalProject.entities.users.AccountHolder;
 import com.example.finalProject.repositories.accountRep.CheckingRepository;
+import com.example.finalProject.repositories.accountRep.CreditCardRepository;
 import com.example.finalProject.repositories.usersRep.AccountHolderRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +25,8 @@ public class FinalProjectApplication implements CommandLineRunner {
 
 	@Autowired
 	CheckingRepository checkingRepository;
+	@Autowired
+	CreditCardRepository creditCardRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinalProjectApplication.class, args);
@@ -42,6 +46,11 @@ public class FinalProjectApplication implements CommandLineRunner {
 		Checking checking2 = new Checking(new Money(new BigDecimal(1000)), new Money(new BigDecimal(50)), accountHolder2, accountHolder2);
 
 		checkingRepository.saveAll(List.of(checking1, checking2));
+
+		CreditCard creditcard = new CreditCard(new Money(new BigDecimal(1000)), new Money(new BigDecimal(50)), accountHolder, accountHolder);
+		CreditCard creditCard = new CreditCard(new Money(new BigDecimal(1000)), new Money(new BigDecimal(50)), accountHolder2, accountHolder2);
+
+		creditCardRepository.saveAll(List.of(creditcard, creditCard));
 
 		System.out.println(accountHolderRespository.save(accountHolder));
 	}

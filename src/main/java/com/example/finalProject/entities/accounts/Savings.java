@@ -14,6 +14,7 @@ public class Savings extends Account{
     @AttributeOverrides({
             @AttributeOverride(name = "currency", column = @Column(name = "minBalanceCurrency")),
             @AttributeOverride(name = "amount", column = @Column(name = "minBalanceAmount"))})
+
     private Money minimumBalance;
     private BigDecimal interestedRate;
 
