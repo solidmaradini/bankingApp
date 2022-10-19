@@ -1,8 +1,8 @@
 package com.example.finalProject.entities.DTO;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 public class AccountDTO {
 
@@ -16,6 +16,8 @@ public class AccountDTO {
     private String interestedRate;
 
     private String minimumBalance;
+
+
 
     public AccountDTO(String balance, String penaltyFee, Long primaryOwnerId, Long secondaryOwnerId, String interestedRate, String minimumBalance) {
         this.balance = balance;

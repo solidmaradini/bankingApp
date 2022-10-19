@@ -1,5 +1,6 @@
 package com.example.finalProject.controllers;
 
+import com.example.finalProject.controllers.interfaces.AccountInterface;
 import com.example.finalProject.entities.DTO.AccountDTO;
 import com.example.finalProject.entities.accounts.Checking;
 import com.example.finalProject.entities.accounts.Savings;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AccountController {
+public class AccountController implements AccountInterface {
 
     @Autowired
     AccountsService accountsService;
