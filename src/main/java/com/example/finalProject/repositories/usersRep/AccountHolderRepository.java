@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountHolderRespository  extends JpaRepository<AccountHolder, Long> {
+public interface AccountHolderRepository extends JpaRepository<AccountHolder, Long> {
 }

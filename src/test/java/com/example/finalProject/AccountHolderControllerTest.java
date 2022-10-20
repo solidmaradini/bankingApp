@@ -1,10 +1,8 @@
 package com.example.finalProject;
 
-import com.example.finalProject.embedables.Money;
 import com.example.finalProject.entities.DTO.TransferDTO;
 import com.example.finalProject.repositories.accountRep.AccountRepository;
-import com.example.finalProject.repositories.usersRep.AccountHolderRespository;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.finalProject.repositories.usersRep.AccountHolderRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,7 +23,7 @@ public class AccountHolderControllerTest {
 
 
     @Autowired
-    AccountHolderRespository accountHolderRespository;
+    AccountHolderRepository accountHolderRespository;
     @Autowired
     AccountRepository accountRepository;
     @Autowired

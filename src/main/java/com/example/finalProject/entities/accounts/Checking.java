@@ -27,12 +27,9 @@ public class Checking extends Account{
         super(balance, penaltyFee, primaryOwner, secondaryOwner);
 
     }
-
-
     public Checking() {
 
     }
-
     public Money getMinimumBalance() {
         return minimumBalance;
     }

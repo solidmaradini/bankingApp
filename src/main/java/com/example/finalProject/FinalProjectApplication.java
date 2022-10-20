@@ -7,7 +7,7 @@ import com.example.finalProject.entities.accounts.CreditCard;
 import com.example.finalProject.entities.users.AccountHolder;
 import com.example.finalProject.repositories.accountRep.CheckingRepository;
 import com.example.finalProject.repositories.accountRep.CreditCardRepository;
-import com.example.finalProject.repositories.usersRep.AccountHolderRespository;
+import com.example.finalProject.repositories.usersRep.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +21,7 @@ import java.util.List;
 public class FinalProjectApplication implements CommandLineRunner {
 
 	@Autowired
-	AccountHolderRespository accountHolderRespository;
+	AccountHolderRepository accountHolderRepository;
 
 	@Autowired
 	CheckingRepository checkingRepository;
@@ -40,18 +40,17 @@ public class FinalProjectApplication implements CommandLineRunner {
 		AccountHolder accountHolder = new AccountHolder(dateOfBirth, address, "Sole", address);
 		AccountHolder accountHolder2 = new AccountHolder(dateOfBirth, address, "Claudia", address);
 
-		accountHolderRespository.saveAll(List.of(accountHolder, accountHolder2));
+		accountHolderRepository.saveAll(List.of(accountHolder, accountHolder2));
 
-		Checking checking1 = new Checking(new Money(new BigDecimal(1000)), new Money(new BigDecimal(50)), accountHolder, accountHolder);
-		Checking checking2 = new Checking(new Money(new BigDecimal(1000)), new Money(new BigDecimal(50)), accountHolder2, accountHolder2);
+		Checking checking1 = new Checking(new Money(new BigDecimal("1000")), new Money(new BigDecimal("50")), accountHolder, accountHolder);
+		Checking checking2 = new Checking(new Money(new BigDecimal("1000")), new Money(new BigDecimal("50")), accountHolder2, accountHolder2);
 
 		checkingRepository.saveAll(List.of(checking1, checking2));
 
-		CreditCard creditcard = new CreditCard(new Money(new BigDecimal(1000)), new Money(new BigDecimal(50)), accountHolder, accountHolder);
-		CreditCard creditCard = new CreditCard(new Money(new BigDecimal(1000)), new Money(new BigDecimal(50)), accountHolder2, accountHolder2);
-
+		CreditCard creditcard = new CreditCard(new Money(new BigDecimal("1000")), new Money(new BigDecimal("50")), accountHolder, accountHolder, new Money(new BigDecimal("250")), new BigDecimal(String.valueOf(0.5)));
+		CreditCard creditCard = new CreditCard(new Money(new BigDecimal("1000")), new Money(new BigDecimal("50")), accountHolder2, accountHolder2, new Money(new BigDecimal("250")), new BigDecimal(String.valueOf(0.5)));
 		creditCardRepository.saveAll(List.of(creditcard, creditCard));
 
-		System.out.println(accountHolderRespository.save(accountHolder));
+		System.out.println(accountHolderRepository.save(accountHolder));
 	}
 }

@@ -6,8 +6,9 @@ import com.example.finalProject.entities.DTO.TransferDTO;
 import com.example.finalProject.entities.DTO.TrasnferResponseDTO;
 import com.example.finalProject.entities.accounts.Account;
 import com.example.finalProject.entities.users.AccountHolder;
+import com.example.finalProject.enums.Status;
 import com.example.finalProject.repositories.accountRep.AccountRepository;
-import com.example.finalProject.repositories.usersRep.AccountHolderRespository;
+import com.example.finalProject.repositories.usersRep.AccountHolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class AccountHolderService implements AccountHolderInterface {
     //metodos para tranferir de una cuenta a la otra;
     //metodo para que un AH vea su balances;
     @Autowired
-    AccountHolderRespository accountHolderRespository;
+    AccountHolderRepository accountHolderRespository;
 
     @Autowired
     AccountRepository accountRepository;
@@ -65,6 +66,17 @@ public class AccountHolderService implements AccountHolderInterface {
 
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account Holder do not exist");
+    }
+
+    public Account changeAccountStatus(Status status, Long id){
+        Account account = accountRepository.findById(id).orElseThrow();
+
+        account.setStatus(status);
+        return accountRepository.save(account);
+
+    }
+    public void  deleteAccount(Long id){
+        accountRepository.deleteAllById(id);
     }
 
 

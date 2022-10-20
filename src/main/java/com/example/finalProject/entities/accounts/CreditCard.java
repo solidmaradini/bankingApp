@@ -14,7 +14,8 @@ public class CreditCard extends Account{
     @AttributeOverrides({
             @AttributeOverride(name = "currency", column = @Column(name = "creditLimitCurrency")),
             @AttributeOverride(name = "amount", column = @Column(name = "creditLimitAmount"))})
-    private Money creditLimit;
+
+    private Money creditLimit = new Money(BigDecimal.valueOf(250));
 
     private BigDecimal interestRate;
 

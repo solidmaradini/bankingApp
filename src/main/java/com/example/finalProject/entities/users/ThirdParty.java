@@ -3,18 +3,16 @@ package com.example.finalProject.entities.users;
 import javax.persistence.Entity;
 
 @Entity
-public class ThridParty extends User{
-
+public class ThirdParty extends User{
     private String name;
-
     private String hashKey;
 
-    public ThridParty(String name, String hashKey) {
+    public ThirdParty(String name, String hashKey) {
         this.name = name;
         this.hashKey = hashKey;
     }
 
-    public ThridParty() {
+    public ThirdParty() {
     }
 
     public String getName() {
