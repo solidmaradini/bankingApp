@@ -55,7 +55,7 @@ public class AccountsService {
         }
 
         if(Period.between(primaryOwner.getDateOfbirth(), LocalDate.now()).getYears() < 24){
-           return studentCheckingRepository.save(new StudentChecking(balance, minimumBalance,penaltyFee, primaryOwner, secondaryOwner));
+           return studentCheckingRepository.save(new StudentChecking(balance,penaltyFee, primaryOwner, secondaryOwner));
 
         }
         Checking checking = new Checking(balance, penaltyFee, primaryOwner, secondaryOwner);
@@ -81,7 +81,7 @@ public class AccountsService {
         }
 
 
-        Savings savings = new Savings(balance, penaltyFee, primaryOwner, secondaryOwner, interestRate, minimumBalance);
+        Savings savings = new Savings(balance, penaltyFee, primaryOwner, secondaryOwner, minimumBalance, interestRate);
 
         return  savingRepository.save(savings);
     }

@@ -2,9 +2,12 @@ package com.example.finalProject.entities.accounts;
 
 import com.example.finalProject.embedables.Money;
 import com.example.finalProject.entities.users.AccountHolder;
+import com.example.finalProject.enums.Status;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
 
 
 @Entity
@@ -15,16 +18,14 @@ public class Savings extends Account{
             @AttributeOverride(name = "currency", column = @Column(name = "minBalanceCurrency")),
             @AttributeOverride(name = "amount", column = @Column(name = "minBalanceAmount"))})
 
-    private Money minimumBalance;
-    private BigDecimal interestedRate;
+    private Money minimumBalance = new Money(BigDecimal.valueOf(1000));
+    private BigDecimal interestedRate = BigDecimal.valueOf(0.00025);
 
-    public Savings(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestedRate, Money minimumBalance) {
+
+    public Savings(Money balance, Money penaltyFee, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money minimumBalance, BigDecimal interestedRate) {
         super(balance, penaltyFee, primaryOwner, secondaryOwner);
-        this.interestedRate = interestedRate;
         this.minimumBalance = minimumBalance;
-    }
-
-    public Savings() {
+        this.interestedRate = interestedRate;
     }
 
     public Money getMinimumBalance() {
@@ -42,4 +43,8 @@ public class Savings extends Account{
     public void setInterestedRate(BigDecimal interestedRate) {
         this.interestedRate = interestedRate;
     }
+
+    public Savings() {
+    }
+
 }

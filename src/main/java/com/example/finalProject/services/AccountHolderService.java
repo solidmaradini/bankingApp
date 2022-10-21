@@ -24,14 +24,22 @@ public class AccountHolderService implements AccountHolderInterface {
     //metodos para tranferir de una cuenta a la otra;
     //metodo para que un AH vea su balances;
     @Autowired
-    AccountHolderRepository accountHolderRespository;
+    AccountHolderRepository accountHolderRepository;
 
     @Autowired
     AccountRepository accountRepository;
 
 
+    public AccountHolder getAccountHolder(Long id){
+
+
+        return accountHolderRepository.findById(id).get();
+        //if prese
+    }
+
+
     public AccountHolder createAccountHolder(AccountHolder accountHolder){
-        return accountHolderRespository.save(accountHolder);
+        return accountHolderRepository.save(accountHolder);
     }
     public TrasnferResponseDTO transferToOneAccountToOther(TransferDTO transferDTO) {
 
@@ -55,8 +63,8 @@ public class AccountHolderService implements AccountHolderInterface {
     //metodo para que un AH vea su balances;
     public Money toCheckBalance(Long id, Long accountId){
 
-        if(accountHolderRespository.findById(id).isPresent() && accountRepository.findById(accountId).isPresent()) {
-            AccountHolder holderId = accountHolderRespository.findById(id).get();
+        if(accountHolderRepository.findById(id).isPresent() && accountRepository.findById(accountId).isPresent()) {
+            AccountHolder holderId = accountHolderRepository.findById(id).get();
             Account account = accountRepository.findById(accountId).get();
             if (account.getPrimeryOwner().getId().equals(holderId.getId()) || account.getSecondaryOwner().getId().equals(holderId.getId())) {
                 return account.getBalance();
@@ -69,14 +77,14 @@ public class AccountHolderService implements AccountHolderInterface {
     }
 
     public Account changeAccountStatus(Status status, Long id){
-        Account account = accountRepository.findById(id).orElseThrow();
+        Account account = accountRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NO_CONTENT));
 
         account.setStatus(status);
         return accountRepository.save(account);
 
     }
-    public void  deleteAccount(Long id){
-        accountRepository.deleteAllById(id);
+    public void deleteAccount(Long id){
+        accountRepository.deleteById(id);
     }
 
 

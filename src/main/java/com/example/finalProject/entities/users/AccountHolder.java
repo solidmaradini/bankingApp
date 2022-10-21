@@ -2,6 +2,7 @@ package com.example.finalProject.entities.users;
 
 import com.example.finalProject.embedables.Address;
 import com.example.finalProject.entities.accounts.Account;
+import com.example.finalProject.entities.security.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -27,19 +28,16 @@ public class AccountHolder extends User{
     @JsonIgnore
     private List<Account> secondaryAccountList;
 
+    public AccountHolder() {
+    }
 
-    public AccountHolder(LocalDate dateOfbirth, Address primaryAddress, String name, Address mailingAddress) {
+    public AccountHolder(String username, String password, LocalDate dateOfbirth, Address primaryAddress, String name, Address mailingAddress) {
+        super(username, password);
         this.dateOfbirth = dateOfbirth;
         this.primaryAddress = primaryAddress;
         this.name = name;
         this.mailingAddress = mailingAddress;
-
     }
-
-    public AccountHolder() {
-    }
-
-
 
     public LocalDate getDateOfbirth() {
         return dateOfbirth;

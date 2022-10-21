@@ -17,7 +17,11 @@ public class AccountHolderController implements AccountHolderInterface {
 
     @Autowired
     AccountHolderService accountHolderService;
-
+    @GetMapping("/accountholder/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public AccountHolder getAccountHolders(@PathVariable Long id){
+        return accountHolderService.getAccountHolder(id);
+    }
 
     @PostMapping("/accountholder")
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,4 +43,5 @@ public class AccountHolderController implements AccountHolderInterface {
     public void deleteAccount(@PathVariable Long id){
         accountHolderService.deleteAccount(id);
     }
+
 }

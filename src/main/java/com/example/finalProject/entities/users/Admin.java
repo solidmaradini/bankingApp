@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 public class Admin extends User{
     private String name;
 
-    public Admin(String name) {
+
+
+    public Admin(String username, String password, String name) {
+        super(username, password);
         this.name = name;
     }
 

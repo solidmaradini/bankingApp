@@ -18,8 +18,9 @@ public class Checking extends Account{
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "currency", column = @Column(name = "monthltyCurrency")),
+            @AttributeOverride(name = "currency", column = @Column(name = "monthlyCurrency")),
             @AttributeOverride(name = "amount", column = @Column(name = "monthlyAmount"))})
+
     private final Money monthlyMaintenanceFee = new Money(BigDecimal.valueOf(12));
 
 

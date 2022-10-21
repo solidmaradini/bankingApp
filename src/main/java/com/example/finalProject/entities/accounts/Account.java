@@ -3,9 +3,11 @@ package com.example.finalProject.entities.accounts;
 
 import com.example.finalProject.embedables.Money;
 import com.example.finalProject.entities.users.AccountHolder;
+import com.example.finalProject.entities.users.User;
 import com.example.finalProject.enums.Status;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -20,7 +22,8 @@ public abstract class Account {
         @AttributeOverrides({
                 @AttributeOverride(name = "currency", column = @Column(name = "penaltyCurrency")),
                 @AttributeOverride(name = "amount", column = @Column(name = "penaltyAmount"))})
-        private Money penaltyFee;
+
+        private Money penaltyFee = new Money(BigDecimal.valueOf(40));
 
         @ManyToOne
         private AccountHolder primaryOwner;
@@ -36,7 +39,6 @@ public abstract class Account {
                 this.secondaryOwner = secondaryOwner;
                 this.creationDate = LocalDate.now();
                 this.status = Status.ACTIVE;
-
         }
 
 

@@ -7,7 +7,9 @@ public class ThirdParty extends User{
     private String name;
     private String hashKey;
 
-    public ThirdParty(String name, String hashKey) {
+
+    public ThirdParty(String username, String password, String name, String hashKey) {
+        super(username, password);
         this.name = name;
         this.hashKey = hashKey;
     }
