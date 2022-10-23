@@ -20,9 +20,6 @@ import java.util.List;
 @Service
 public class AccountHolderService implements AccountHolderInterface {
 
-    //metodos para crear accountHolder;
-    //metodos para tranferir de una cuenta a la otra;
-    //metodo para que un AH vea su balances;
     @Autowired
     AccountHolderRepository accountHolderRepository;
 
@@ -34,7 +31,7 @@ public class AccountHolderService implements AccountHolderInterface {
 
 
         return accountHolderRepository.findById(id).get();
-        //if prese
+
     }
 
 
@@ -60,7 +57,7 @@ public class AccountHolderService implements AccountHolderInterface {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "one or both of the accounts do not exist");
 
     }
-    //metodo para que un AH vea su balances;
+
     public Money toCheckBalance(Long id, Long accountId){
 
         if(accountHolderRepository.findById(id).isPresent() && accountRepository.findById(accountId).isPresent()) {
@@ -86,6 +83,7 @@ public class AccountHolderService implements AccountHolderInterface {
     public void deleteAccount(Long id){
         accountRepository.deleteById(id);
     }
+
 
 
 }

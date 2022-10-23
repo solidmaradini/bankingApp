@@ -36,8 +36,13 @@ public class SecurityConfiguration {
 
         httpSecurity.authorizeRequests()
                 .mvcMatchers(HttpMethod.GET,"/users").hasAnyRole("HOLDER")
+                .mvcMatchers(HttpMethod.POST, "/account-holder/**").hasRole("HOLDER")
+                .mvcMatchers(HttpMethod.PUT, "/change-status/**").hasRole("HOLDER")
+                .mvcMatchers(HttpMethod.PATCH, "/transfer/**").hasRole("ADMIN")
+                .mvcMatchers(HttpMethod.DELETE, "/delete-account/**").hasRole("ADMIN")
 //                .mvcMatchers(HttpMethod.POST,"/holder").hasAnyRole("ADMIN")
                 .mvcMatchers(HttpMethod.GET,"/admin/**").hasRole("ADMIN")
+                .mvcMatchers(HttpMethod.POST,"/third-party/**").hasRole("THIRD")
                 .anyRequest().permitAll();
 
         httpSecurity.csrf().disable();

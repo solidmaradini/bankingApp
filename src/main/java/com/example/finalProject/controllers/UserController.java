@@ -27,7 +27,7 @@ public class UserController {
         @PostMapping("/admin")
         @ResponseStatus(HttpStatus.CREATED)
         public Admin createAdmin(@RequestBody Admin admin){
-                System.err.println("!!!!!!!!!" + admin.getName());
+               // System.err.println("!!!!!!!!!" + admin.getName());
             return userServiceInterface.createAdmin(admin);
 
         }

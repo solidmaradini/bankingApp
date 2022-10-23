@@ -79,7 +79,7 @@ public class FinalProjectApplication implements CommandLineRunner {
 		CreditCard creditCard = new CreditCard(new Money(new BigDecimal("1200")), new Money(new BigDecimal("30")), accountHolder2, accountHolder2, new Money(new BigDecimal("250")), new BigDecimal(String.valueOf(0.5)));
 		creditCardRepository.saveAll(List.of(creditcard, creditCard));
 
-//		User user = userRepository.save(new User("soledad",passwordEncoder.encode("1234")));
+
 		roleRepository.save(new Role("HOLDER",accountHolder));
 
 
